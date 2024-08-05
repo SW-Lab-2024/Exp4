@@ -23,9 +23,12 @@
 hs_err_pid*
 replay_pid*
 
+*.idea/
+*.iml
+example/target/
+=======
 # Intellij
 *.idea
 *.code
 
 # Out
-out
