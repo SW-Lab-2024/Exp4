@@ -26,3 +26,6 @@ replay_pid*
 # Intellij
 *.idea
 *.code
+
+# Out
+out
