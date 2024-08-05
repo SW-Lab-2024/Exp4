@@ -43,6 +43,15 @@ public class Metro {
         return adjacencyList;
     }
 
+    public void displayGraph() {
+        for (Map.Entry<Station, List<Station>> entry : adjacencyList.entrySet()) {
+            System.out.print(entry.getKey() + " is connected to: ");
+            for (Station connectedStation : entry.getValue()) {
+                System.out.print(connectedStation + " ");
+            }
+            System.out.println();
+        }
+    }
 
     public class Station {
         private final String name;
