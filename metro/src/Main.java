@@ -29,7 +29,22 @@ public class Main {
         metro.addPath("Station17", "Station18");
         metro.addPath("Station18", "Station19");
         metro.addPath("Station19", "Station20");
-        metro.addPath("Station20", "Station1");
+        metro.addPath("Station20", "Station21");
+        metro.addPath("Station21", "Station22");
+        metro.addPath("Station22", "Station23");
+        metro.addPath("Station23", "Station24");
+        metro.addPath("Station24", "Station25");
+        metro.addPath("Station25", "Station26");
+        metro.addPath("Station26", "Station27");
+        metro.addPath("Station27", "Station28");
+        metro.addPath("Station28", "Station29");
+        metro.addPath("Station29", "Station30");
+        metro.addPath("Station30", "Station31");
+        metro.addPath("Station31", "Station32");
+        metro.addPath("Station32", "Station33");
+        metro.addPath("Station33", "Station34");
+        metro.addPath("Station34", "Station35");
+        metro.addPath("Station35", "Station1");
 
         // Adding some additional paths to increase complexity
         metro.addPath("Station1", "Station10");
@@ -70,8 +85,7 @@ public class Main {
 
         metro.displayGraph();
 
-        System.out.println("Path from Station1 to Station20: " + metro.findPathNaive("Station1", "Station20"));
+        System.out.println("Path from Station1 to Station35: " + metro.findPathNaive("Station1", "Station35"));    }
 
 
     }
-}
