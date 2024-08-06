@@ -43,6 +43,23 @@ public class Metro {
         return adjacencyList;
     }
 
+    public List<String> findPathNaive(String startName, String endName) {
+        Station start = getStationByName(startName);
+        Station end = getStationByName(endName);
+
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("One or both stations not found");
+        }
+
+        List<String> path = new ArrayList<>();
+        Set<Station> visited = new HashSet<>();
+
+        if (dfs(start, end, path, visited)) {
+            return path;
+        } else {
+            return null; // No path found
+        }
+    }
     public void displayGraph() {
         for (Map.Entry<Station, List<Station>> entry : adjacencyList.entrySet()) {
             System.out.print(entry.getKey() + " is connected to: ");
@@ -52,6 +69,37 @@ public class Metro {
             System.out.println();
         }
     }
+
+
+    // Helper DFS method
+    private boolean dfs(Station current, Station end, List<String> path, Set<Station> visited) {
+        path.add(current.getName());
+        visited.add(current);
+
+        if (current.equals(end)) {
+            return true;
+        }
+
+        for (Station neighbor : adjacencyList.get(current)) {
+            if (!visited.contains(neighbor)) {
+                System.out.println("Connecting " + current.getName() + " to " + neighbor.getName());
+                // Simulate a delay of 1 second for each connection
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                if (dfs(neighbor, end, path, visited)) {
+                    return true;
+                }
+            }
+        }
+
+        path.remove(path.size() - 1);
+        return false;
+    }
+
+
 
     public class Station {
         private final String name;
@@ -67,6 +115,19 @@ public class Metro {
         @Override
         public String toString() {
             return name;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Station station = (Station) obj;
+            return Objects.equals(name, station.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name);
         }
     }
 
