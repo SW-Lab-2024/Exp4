@@ -4,7 +4,7 @@ public class Main {
     // Main method for testing
     public static void main(String[] args) {
         Metro metro = new Metro();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 35; i++) {
             metro.addStation("Station" + i);
         }
 
@@ -43,6 +43,30 @@ public class Main {
         metro.addPath("Station9", "Station18");
         metro.addPath("Station10", "Station19");
         metro.addPath("Station11", "Station20");
+        metro.addPath("Station12", "Station21");
+        metro.addPath("Station13", "Station22");
+        metro.addPath("Station14", "Station23");
+        metro.addPath("Station15", "Station24");
+        metro.addPath("Station16", "Station25");
+        metro.addPath("Station17", "Station26");
+        metro.addPath("Station18", "Station27");
+        metro.addPath("Station19", "Station28");
+        metro.addPath("Station20", "Station29");
+        metro.addPath("Station21", "Station30");
+        metro.addPath("Station22", "Station31");
+        metro.addPath("Station23", "Station32");
+        metro.addPath("Station24", "Station33");
+        metro.addPath("Station25", "Station34");
+        metro.addPath("Station26", "Station35");
+        metro.addPath("Station27", "Station1");
+        metro.addPath("Station28", "Station2");
+        metro.addPath("Station29", "Station3");
+        metro.addPath("Station30", "Station4");
+        metro.addPath("Station31", "Station5");
+        metro.addPath("Station32", "Station6");
+        metro.addPath("Station33", "Station7");
+        metro.addPath("Station34", "Station8");
+        metro.addPath("Station35", "Station9");
 
         metro.displayGraph();
 
