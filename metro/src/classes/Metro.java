@@ -82,6 +82,13 @@ public class Metro {
 
         for (Station neighbor : adjacencyList.get(current)) {
             if (!visited.contains(neighbor)) {
+                System.out.println("Connecting " + current.getName() + " to " + neighbor.getName());
+                // Simulate a delay of 1 second for each connection
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
                 if (dfs(neighbor, end, path, visited)) {
                     return true;
                 }
@@ -91,6 +98,8 @@ public class Metro {
         path.remove(path.size() - 1);
         return false;
     }
+
+
 
     public class Station {
         private final String name;
