@@ -53,6 +53,28 @@ public class Metro {
         }
     }
 
+
+    // Helper DFS method
+    private boolean dfs(Station current, Station end, List<String> path, Set<Station> visited) {
+        path.add(current.getName());
+        visited.add(current);
+
+        if (current.equals(end)) {
+            return true;
+        }
+
+        for (Station neighbor : adjacencyList.get(current)) {
+            if (!visited.contains(neighbor)) {
+                if (dfs(neighbor, end, path, visited)) {
+                    return true;
+                }
+            }
+        }
+
+        path.remove(path.size() - 1);
+        return false;
+    }
+
     public class Station {
         private final String name;
 
