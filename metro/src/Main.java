@@ -15,5 +15,6 @@ public class Main {
         metro.addPath("StationC", "StationD");
 
         metro.displayGraph();
+        System.out.println("Path from StationA to StationD: " + metro.findPathNaive("StationA", "StationD"));
     }
 }
