@@ -8,13 +8,26 @@ public class Main {
         metro.addStation("StationB");
         metro.addStation("StationC");
         metro.addStation("StationD");
+        metro.addStation("StationE");
+        metro.addStation("StationF");
+        metro.addStation("StationG");
+        metro.addStation("StationH");
 
         metro.addPath("StationA", "StationB");
         metro.addPath("StationA", "StationC");
         metro.addPath("StationB", "StationD");
         metro.addPath("StationC", "StationD");
+        metro.addPath("StationD", "StationE");
+        metro.addPath("StationE", "StationF");
+        metro.addPath("StationF", "StationG");
+        metro.addPath("StationG", "StationH");
+        metro.addPath("StationH", "StationA");
+        metro.addPath("StationC", "StationF");
+        metro.addPath("StationB", "StationG");
 
         metro.displayGraph();
-        System.out.println("Path from StationA to StationD: " + metro.findPathNaive("StationA", "StationD"));
+
+        System.out.println("Path from StationA to StationH: " + metro.findPathNaive("StationA", "StationH"));
+
     }
 }
