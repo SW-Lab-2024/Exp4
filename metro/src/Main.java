@@ -85,7 +85,7 @@ public class Main {
 
         metro.displayGraph();
 
-        System.out.println("Path from Station1 to Station35: " + metro.findPathNaive("Station1", "Station35"));    }
-
+        System.out.println("Path from Station1 to Station35: " + metro.findPathBFS("Station1", "Station35"));
+    }
 
     }

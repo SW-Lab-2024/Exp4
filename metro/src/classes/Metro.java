@@ -43,23 +43,7 @@ public class Metro {
         return adjacencyList;
     }
 
-    public List<String> findPathNaive(String startName, String endName) {
-        Station start = getStationByName(startName);
-        Station end = getStationByName(endName);
 
-        if (start == null || end == null) {
-            throw new IllegalArgumentException("One or both stations not found");
-        }
-
-        List<String> path = new ArrayList<>();
-        Set<Station> visited = new HashSet<>();
-
-        if (dfs(start, end, path, visited)) {
-            return path;
-        } else {
-            return null; // No path found
-        }
-    }
     public void displayGraph() {
         for (Map.Entry<Station, List<Station>> entry : adjacencyList.entrySet()) {
             System.out.print(entry.getKey() + " is connected to: ");
@@ -69,35 +53,58 @@ public class Metro {
             System.out.println();
         }
     }
+    public List<String> findPathBFS(String startName, String endName) {
+        Station start = getStationByName(startName);
+        Station end = getStationByName(endName);
 
-
-    // Helper DFS method
-    private boolean dfs(Station current, Station end, List<String> path, Set<Station> visited) {
-        path.add(current.getName());
-        visited.add(current);
-
-        if (current.equals(end)) {
-            return true;
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("One or both stations not found");
         }
 
-        for (Station neighbor : adjacencyList.get(current)) {
-            if (!visited.contains(neighbor)) {
-                System.out.println("Connecting " + current.getName() + " to " + neighbor.getName());
-                // Simulate a delay of 1 second for each connection
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-                if (dfs(neighbor, end, path, visited)) {
-                    return true;
+        Queue<Station> queue = new LinkedList<>();
+        Map<Station, Station> previous = new HashMap<>();
+        Set<Station> visited = new HashSet<>();
+
+        queue.add(start);
+        visited.add(start);
+
+        while (!queue.isEmpty()) {
+            Station current = queue.poll();
+
+            if (current.equals(end)) {
+                return reconstructPath(previous, start, end);
+            }
+
+            for (Station neighbor : adjacencyList.get(current)) {
+                if (!visited.contains(neighbor)) {
+                    System.out.println("Connecting " + current.getName() + " to " + neighbor.getName());
+                    visited.add(neighbor);
+                    previous.put(neighbor, current);
+                    queue.add(neighbor);
+                    // Simulate a delay of 1 second for each connection
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
             }
         }
 
-        path.remove(path.size() - 1);
-        return false;
+        return null; // No path found
     }
+
+    // Helper method to reconstruct the path
+    private List<String> reconstructPath(Map<Station, Station> previous, Station start, Station end) {
+        List<String> path = new ArrayList<>();
+        for (Station at = end; at != null; at = previous.get(at)) {
+            path.add(at.getName());
+        }
+        Collections.reverse(path);
+        return path;
+    }
+
+
 
 
 
