@@ -43,6 +43,23 @@ public class Metro {
         return adjacencyList;
     }
 
+    public List<String> findPathNaive(String startName, String endName) {
+        Station start = getStationByName(startName);
+        Station end = getStationByName(endName);
+
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("One or both stations not found");
+        }
+
+        List<String> path = new ArrayList<>();
+        Set<Station> visited = new HashSet<>();
+
+        if (dfs(start, end, path, visited)) {
+            return path;
+        } else {
+            return null; // No path found
+        }
+    }
     public void displayGraph() {
         for (Map.Entry<Station, List<Station>> entry : adjacencyList.entrySet()) {
             System.out.print(entry.getKey() + " is connected to: ");
