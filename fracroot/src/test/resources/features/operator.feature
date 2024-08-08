@@ -47,3 +47,23 @@ Feature: Operator
     Given Two double input values, 4.5 and 1.5
     When I do the operation on the two values
     Then I expect an illegal argument error throws
+
+  Scenario: Negative arguments
+    Given Two integer input values, -4 and 1
+    When I do the operation on the two values
+    Then I expect a negative argument error throws
+
+  Scenario: Negative arguments
+    Given Two integer input values, 4 and -1
+    When I do the operation on the two values
+    Then I expect a negative argument error throws
+
+  Scenario: Negative arguments
+    Given Two integer input values, -4 and -1
+    When I do the operation on the two values
+    Then I expect the result 2
+
+  Scenario: Negative double arguments
+    Given Two double input values, -4.5 and 1
+    When I do the operation on the two values
+    Then I expect an illegal argument error throws

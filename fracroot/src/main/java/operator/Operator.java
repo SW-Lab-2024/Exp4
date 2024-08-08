@@ -10,6 +10,9 @@ public class Operator {
     }
 
     private double root(double val) {
+        if (val < 0) {
+            throw new IllegalArgumentException("Cannot compute the square root of a negative number.");
+        }
         return Math.sqrt(val);
     }
 

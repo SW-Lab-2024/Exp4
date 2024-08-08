@@ -17,13 +17,13 @@ public class MyStepdefs {
         operator = new Operator();
     }
 
-    @Given("^Two integer input values, (\\d+) and (\\d+)$")
+    @Given("^Two integer input values, (-?\\d+) and (-?\\d+)$")
     public void twoIntegerInputValues(int arg0, int arg1) {
         val1 = arg0;
         val2 = arg1;
     }
 
-    @Given("^Two double input values, (\\d+\\.?\\d*) and (\\d+\\.?\\d*)$")
+    @Given("^Two double input values, (-?\\d+\\.?\\d*) and (-?\\d+\\.?\\d*)$")
     public void twoDoubleInputValues(double arg0, double arg1) {
         val1 = arg0;
         val2 = arg1;
@@ -33,8 +33,10 @@ public class MyStepdefs {
     public void iDoTheOperationOnTheTwoValues() {
         try {
             result = operator.operate(val1, val2);
-        } catch (IllegalArgumentException | ArithmeticException e) {
+        } catch (IllegalArgumentException e) {
             result = Double.NaN;
+        } catch (ArithmeticException e) {
+            result = Double.POSITIVE_INFINITY;
         }
     }
 
@@ -52,6 +54,11 @@ public class MyStepdefs {
 
     @Then("^I expect an arithmetic error throws$")
     public void iExpectAnArithmeticErrorThrows() {
+        Assert.assertTrue(Double.isInfinite(result));
+    }
+
+    @Then("^I expect a negative argument error throws$")
+    public void iExpectANegativeArgumentErrorThrows() {
         Assert.assertTrue(Double.isNaN(result));
     }
 }
