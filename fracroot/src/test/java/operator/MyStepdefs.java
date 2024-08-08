@@ -33,19 +33,25 @@ public class MyStepdefs {
     public void iDoTheOperationOnTheTwoValues() {
         try {
             result = operator.operate(val1, val2);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ArithmeticException e) {
             result = Double.NaN;
         }
     }
 
     @Then("^I expect the result (\\d+\\.?\\d*)$")
-    public void iExpectTheResult(int arg0) {
+    public void iExpectTheResult(double arg0) {
         System.out.println("Expected: " + arg0 + " Actual: " + result + " Acceptable delta: 0.001");
         Assert.assertEquals(arg0, result, 0.001);
     }
 
     @Then("^I expect an illegal argument error throws$")
     public void iExpectAnIllegalArgumentErrorThrows() {
+        Assert.assertTrue(Double.isNaN(result));
+    }
+
+
+    @Then("^I expect an arithmetic error throws$")
+    public void iExpectAnArithmeticErrorThrows() {
         Assert.assertTrue(Double.isNaN(result));
     }
 }
