@@ -8,8 +8,8 @@ import org.junit.Assert;
 
 public class MyStepdefs {
     private Operator operator;
-    private int val1;
-    private int val2;
+    private Object val1;
+    private Object val2;
     private double result;
 
     @Before
@@ -17,21 +17,35 @@ public class MyStepdefs {
         operator = new Operator();
     }
 
-    @Given("^Two input values, (\\d+) and (\\d+)$")
-    public void twoInputValuesAnd(int arg0, int arg1) {
+    @Given("^Two integer input values, (\\d+) and (\\d+)$")
+    public void twoIntegerInputValues(int arg0, int arg1) {
+        val1 = arg0;
+        val2 = arg1;
+    }
+
+    @Given("^Two double input values, (\\d+\\.?\\d*) and (\\d+\\.?\\d*)$")
+    public void twoDoubleInputValues(double arg0, double arg1) {
         val1 = arg0;
         val2 = arg1;
     }
 
     @When("^I do the operation on the two values$")
     public void iDoTheOperationOnTheTwoValues() {
-        operator = new Operator();
-        result = operator.operate(val1, val2);
+        try {
+            result = operator.operate(val1, val2);
+        } catch (IllegalArgumentException e) {
+            result = Double.NaN;
+        }
     }
 
-    @Then("^I expect the result (\\d+)$")
+    @Then("^I expect the result (\\d+\\.?\\d*)$")
     public void iExpectTheResult(int arg0) {
         System.out.println("Expected: " + arg0 + " Actual: " + result + " Acceptable delta: 0.001");
         Assert.assertEquals(arg0, result, 0.001);
+    }
+
+    @Then("^I expect an illegal argument error throws$")
+    public void iExpectAnIllegalArgumentErrorThrows() {
+        Assert.assertTrue(Double.isNaN(result));
     }
 }

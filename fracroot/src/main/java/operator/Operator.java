@@ -10,7 +10,10 @@ public class Operator {
         return Math.sqrt(val);
     }
 
-    public double operate(int val1, int val2) {
-        return root(frac(val1, val2));
+    public double operate(Object val1, Object val2) {
+        if (!(val1 instanceof Integer) || !(val2 instanceof Integer)) {
+            throw new IllegalArgumentException("Only integer inputs are supported.");
+        }
+        return root(frac((int) val1, (int) val2));
     }
 }
