@@ -1,12 +1,13 @@
-package operator;
+package operator.manual;
 
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import operator.Operator;
 import org.junit.Assert;
 
-public class MyStepdefs {
+public class MyManualStepdefs {
     private Operator operator;
     private Object val1;
     private Object val2;
@@ -29,7 +30,7 @@ public class MyStepdefs {
         val2 = arg1;
     }
 
-    @When("^I do the operation on the two values$")
+    @When("^I perform the operation on the two values$")
     public void iDoTheOperationOnTheTwoValues() {
         try {
             result = operator.operate(val1, val2);
